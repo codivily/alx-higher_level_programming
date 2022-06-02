@@ -4,6 +4,9 @@ def uppercase(str):
     ordA = ord('A')
     ordz = ord('z')
     lastI = len(str) - 1
+    if lastI < 0:
+        print()
+        return
     for i in range(len(str)):
         c = ord(str[i])
         print('{:c}'.format(ordA + c - orda if (c >= orda and c <= ordz)
