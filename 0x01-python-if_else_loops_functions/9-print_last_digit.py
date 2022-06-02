@@ -5,5 +5,5 @@ def print_last_digit(number):
     if ord_digit >= ord('0') and ord_digit <= ord('9'):
         print("{:c}".format(ord_digit), end="")
     else:
-        digit = ""
+        raise Exception("Invalid number")
     return (digit)
