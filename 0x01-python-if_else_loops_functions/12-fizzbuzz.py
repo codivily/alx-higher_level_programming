@@ -1,4 +1,13 @@
 #!/usr/bin/python3
 def fizzbuzz():
     for n in range(1, 101):
-        print("Fizz" if n % 3 == 0 else ("Buzz" if n % 5 == 0 else n), end=" ")
+        mod3 = (n % 3 == 0)
+        mod5 = (n % 5 == 0)
+        if mod3 or mod5:
+            if mod3:
+                print("Fizz", end="")
+            if mod5:
+                print("Buzz", end="")
+        else:
+            print(n, end="")
+        print(" ", end="")
