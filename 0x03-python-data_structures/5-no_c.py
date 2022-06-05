@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 def no_c(my_string):
-    if  type(my_string) != str:
+    if type(my_string) != str:
         raise Exception("Not a string")
     new_string = ""
     for c in my_string:
