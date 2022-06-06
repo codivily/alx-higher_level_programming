@@ -12,16 +12,19 @@ int is_palindrome(listint_t **head)
 
 	if (!head)
 		return (1);
+
 	s = *head;
-	while (s != e)
+
+	while (s != old_e)
 	{
 		e = s;
 		while (e->next != old_e)
 			e = e->next;
-		old_e = e;
 		if (s->n != e->n)
 			return (0);
 		s = s->next;
+		old_e = e;
 	}
+
 	return (1);
 }
