@@ -1,4 +1,6 @@
 #include "lists.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <stddef.h>
 
 /**
@@ -10,21 +12,21 @@ int is_palindrome(listint_t **head)
 {
 	listint_t *s = NULL, *e = NULL, *old_e = NULL;
 
-	if (!head)
-		return (1);
-
+	if (head == NULL)
+	{
+		perror("Not a list\n");
+		exit(1);
+	}
 	s = *head;
-
-	while (s != old_e)
+	while (s != e)
 	{
 		e = s;
 		while (e->next != old_e)
 			e = e->next;
 		if (s->n != e->n)
 			return (0);
-		s = s->next;
 		old_e = e;
+		s = s->next;
 	}
-
 	return (1);
 }
