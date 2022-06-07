@@ -10,22 +10,19 @@
  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *s = NULL, *e = NULL, *old_e = NULL;
+	listint_t *s = NULL, *e = NULL, *tmp = NULL;
 
-	if (head == NULL)
-	{
-		perror("Not a list\n");
-		exit(1);
-	}
+	if (!(*head))
+		return (1);
 	s = *head;
-	while (s != e)
+	while (s != tmp && s != e)
 	{
+		tmp = e;
 		e = s;
-		while (e->next != old_e)
+		while (e->next != tmp)
 			e = e->next;
 		if (s->n != e->n)
 			return (0);
-		old_e = e;
 		s = s->next;
 	}
 	return (1);
