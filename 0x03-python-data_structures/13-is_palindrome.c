@@ -10,13 +10,27 @@
  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *s = NULL, *e = NULL, *tmp = NULL;
+	listint_t *s = NULL, *e = NULL, *mid = NULL, *tmp = NULL;
+	size_t count = 0, half = 0, i = 0;
 
+	tmp = *head;
+	while (tmp)
+	{
+		count++;
+		tmp = tmp->next;
+	}
+	half = count / 2;
+	mid = *head;
+	while (i != half)
+	{
+		mid = mid->next;
+		i++;
+	}
 	s = *head;
-	while (s != tmp && s != e)
+	while (s != mid)
 	{
 		tmp = e;
-		e = s;
+		e = mid;
 		while (e->next != tmp)
 			e = e->next;
 		if (s->n != e->n)
