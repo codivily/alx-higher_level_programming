@@ -1,4 +1,5 @@
 #include "Python.h"
+#include <unistd.h>
 
 /**
  * print_python_bytes - print some basic info about Python lists
@@ -17,15 +18,15 @@ void print_python_bytes(PyObject *p)
 		printf(" [ERROR] Invalid Bytes Object\n");
 		return;
 	}
-
 	sz = PyBytes_Size(p);
+	s = PyBytes_AsString(p);
 	printf(" size: %ld\n", sz);
-	printf(" trying string: %s\n", PyBytes_AsString(p));
+	printf(" trying string: %s\n", s);
 
 	sz = sz > 10 ? 10 : sz + 1;
 	p = PyBytes_FromStringAndSize(PyBytes_AsString(p), sz);
 	s = PyBytes_AsString(p);
-	printf("first %ld bytes:", sz);
+	printf(" first %ld bytes:", sz);
 	for (i = 0; i < sz; i++)
 		printf(" %02x", (unsigned char)*s++);
 	printf("\n");
