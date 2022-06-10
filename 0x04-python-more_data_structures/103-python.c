@@ -15,10 +15,10 @@ void print_python_bytes(PyObject *p)
 	Py_ssize_t i, sz;
 	char *s;
 
-	printf("[.] bytes object info\n");
+	printf("[.] bxytes object info\n");
 	if (!PyBytes_Check(p))
 	{
-		printf(" [ERROR] Invalid Bytes Object\n");
+		perror(" [ERROR] Invalid Bytes Object\n");
 		return;
 	}
 	sz = PyBytes_Size(p);
