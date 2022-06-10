@@ -1,5 +1,8 @@
 #include "Python.h"
-#include <unistd.h>
+#include <ctype.h>
+
+PyAPI_FUNC(void) print_python_bytes(PyObject *p);
+PyAPI_FUNC(void) print_python_list(PyObject *p);
 
 /**
  * print_python_bytes - print some basic info about Python lists
@@ -21,12 +24,19 @@ void print_python_bytes(PyObject *p)
 	sz = PyBytes_Size(p);
 	s = PyBytes_AsString(p);
 	printf(" size: %ld\n", sz);
-	printf(" trying string: %s\n", s);
+	printf(" trying string: ");
+	for (i = 0; i < sz; i++)
+	{
+		printf("%c", *s);
+		if (!isprint(*s++))
+			break;
+	}
+	printf("\n");
 
 	sz = sz > 10 ? 10 : sz + 1;
 	p = PyBytes_FromStringAndSize(PyBytes_AsString(p), sz);
 	s = PyBytes_AsString(p);
-	printf(" first %ld bytes:", sz);
+	printf("first %ld bytes:", sz);
 	for (i = 0; i < sz; i++)
 		printf(" %02x", (unsigned char)*s++);
 	printf("\n");
@@ -40,9 +50,13 @@ void print_python_bytes(PyObject *p)
  */
 void print_python_list(PyObject *p)
 {
-	Py_ssize_t len = PyList_GET_SIZE(p);
+	Py_ssize_t len;
 	Py_ssize_t i = 0;
 	PyObject *tmp;
+
+	if (!p)
+		return;
+	len = PyList_GET_SIZE(p);
 
 	printf("[*] Python list info\n");
 	printf("[*] Size of the Python List = %ld\n", len);
