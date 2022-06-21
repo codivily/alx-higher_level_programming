@@ -56,7 +56,6 @@ class Square:
     @position.setter
     def position(self, value):
         """__position property setter"""
-        print(value)
         if not (
                 isinstance(value, tuple) and
                 len(value) == 2 and
@@ -69,9 +68,13 @@ class Square:
 
     def my_print(self):
         """Draw the square to the stdout"""
-        if self.__size == 0:
+        x = self.__position[0]
+        y = self.__position[1]
+        for _ in range(y):
             print()
+        if self.__size == 0:
+            print(" " * x)
             return
 
         for i in range(self.__size):
-            print("#" * self.__size)
+            print(" " * x + "#" * self.__size)
