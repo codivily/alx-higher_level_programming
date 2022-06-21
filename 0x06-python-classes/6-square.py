@@ -72,7 +72,7 @@ class Square:
         y = self.__position[1]
 
         if self.__size == 0:
-            print(" " * x)
+            print()
             return
 
         for _ in range(y):
