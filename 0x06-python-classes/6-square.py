@@ -11,9 +11,6 @@ class Square:
                 size (int): size initializer
                 position (tuple): a tuple of two position integer
         """
-        self.__size = None
-        self.__position = None
-
         self.size = size
         self.position = position
 
@@ -73,9 +70,12 @@ class Square:
             print()
             return
 
-        x = self.__position[0] * " "
-        y = self.__position[1] * "\n"
+        x = " " * self.__position[0] 
+        y = "\n" * self.__position[1] 
+
         print(y, end="")
+        if y > 0:
+            x = ""
 
         for i in range(self.__size):
             print(x + "#" * self.__size)
