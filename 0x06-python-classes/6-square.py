@@ -69,10 +69,10 @@ class Square:
         x = " " * self.__position[0]
         y = "\n" * self.__position[1]
 
-        print(y, end="")
-
         if self.__size == 0:
             print()
+            return
 
+        print(y, end="")
         for i in range(self.__size):
             print(x + "#" * self.__size)
