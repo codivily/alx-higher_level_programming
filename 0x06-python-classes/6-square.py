@@ -70,11 +70,13 @@ class Square:
         """Draw the square to the stdout"""
         x = self.__position[0]
         y = self.__position[1]
-        for _ in range(y):
-            print()
+
         if self.__size == 0:
             print(" " * x)
             return
+
+        for _ in range(y):
+            print()
 
         for i in range(self.__size):
             print(" " * x + "#" * self.__size)
