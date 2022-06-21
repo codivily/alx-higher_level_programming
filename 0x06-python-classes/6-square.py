@@ -9,7 +9,7 @@ class Square:
         """
             Args:
                 size (int): size initializer
-                position (tuple): a tuple of two position integer
+                position (tuple): a tuple of two positive integer
         """
         self.__size = None
         self.__position = None
@@ -64,7 +64,7 @@ class Square:
                 type(value[1]) is int and
                 value[0] >= 0 and
                 value[1] >= 0):
-            raise TypeError("position must be a tuple of 2 position integers")
+            raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = value
 
     def my_print(self):
