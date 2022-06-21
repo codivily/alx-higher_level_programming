@@ -28,6 +28,12 @@ class Square:
 
         return (self.__size ** 2)
 
+    @property
+    def size(self):
+        """__size property getter"""
+        return self.__size
+
+    @size.setter
     def size(self, value):
         """__size property setter.
 
