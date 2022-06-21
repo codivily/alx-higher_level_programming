@@ -11,6 +11,8 @@ class Square:
                 size (int): size initializer
                 position (tuple): a tuple of two position integer
         """
+        self.__size = None
+        self.__position = None
 
         self.size = size
         self.position = position
@@ -21,7 +23,6 @@ class Square:
             Returns:
                 The area. An (integer)
         """
-
         return (self.__size ** 2)
 
     @property
@@ -68,7 +69,6 @@ class Square:
 
     def my_print(self):
         """Draw the square to the stdout"""
-
         if self.__size == 0:
             print()
             return
