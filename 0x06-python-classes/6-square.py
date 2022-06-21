@@ -11,6 +11,9 @@ class Square:
                 size (int): size initializer
                 position (tuple): a tuple of two position integer
         """
+        self.__size = None
+        self.__position = None
+
         self.size = size
         self.position = position
 
@@ -38,7 +41,7 @@ class Square:
                 TypeError: if `value` is not an integer
                 ValueError: if `value` is < 0
         """
-        if not isinstance(value, int):
+        if type(value) is not int:
             raise TypeError("size must be an integer")
 
         if value < 0:
@@ -55,10 +58,10 @@ class Square:
     def position(self, value):
         """__position property setter"""
         if not (
-                isinstance(value, tuple) and
+                type(value) is tuple and
                 len(value) == 2 and
-                isinstance(value[0], int) and
-                isinstance(value[1], int) and
+                type(value[0]) is int and
+                type(value[1]) is int and
                 value[0] >= 0 and
                 value[1] >= 0):
             raise TypeError("position must be a tuple of 2 position integers")
