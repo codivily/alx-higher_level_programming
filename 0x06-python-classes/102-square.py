@@ -66,7 +66,7 @@ class Square:
         """square1 != square2"""
         if instance is not None and type(instance) is not Square:
             raise TypeError(self.__operr_msg('!=', instance))
-        return instance is None or self.area() != instance.area()
+        return instance is not None and self.area() != instance.area()
 
     def __gt__(self, instance):
         """square1 > square2"""
