@@ -24,7 +24,7 @@ class Node:
     def data(self, value):
         """___data property setter"""
         if type(value) is not int:
-            raise TypError("data must be an integer")
+            raise TypeError("data must be an integer")
         self.__data = value
 
     @property
@@ -50,10 +50,13 @@ class SinglyLinkedList:
         """Prints the value in the singly linked list"""
         node = self.__head
         text = ""
-        while node:
-            text += "{:d}\n".format(node.data)
+        if node:
+            text = "{:d}".format(node.data)
             node = node.next_node
-        return text[:-1]
+        while node:
+            text += "\n{:d}".format(node.data)
+            node = node.next_node
+        return text
 
     def sorted_insert(self, value):
         """Inserts a new Node into the correct sorted position in the list
@@ -70,10 +73,9 @@ class SinglyLinkedList:
             tmp = cursor
             cursor = cursor.next_node
 
+        new_node.next_node = cursor
+
         if not tmp:
             self.__head = new_node
         else:
             tmp.next_node = new_node
-
-        if cursor:
-            new_node.next_node = cursor
