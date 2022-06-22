@@ -19,7 +19,6 @@ class Square:
 
     def area(self):
         """Compute the area of the Square.
-
             Returns:
                 The area. An (integer)
         """
@@ -33,10 +32,8 @@ class Square:
     @size.setter
     def size(self, value):
         """__size property setter.
-
             Args:
                 value (int): new size value
-
             Raises:
                 TypeError: if `value` is not an integer
                 ValueError: if `value` is < 0
@@ -71,13 +68,13 @@ class Square:
         """Print a square"""
         print(self)
 
-    def __str__(self):
+    def __repr__(self):
         """Square to str"""
         x = " " * self.__position[0]
         y = "\n" * self.__position[1]
 
         if self.__size == 0:
-            return "\n"
+            return ""
 
         text = y + x + "#" * self.__size
 
