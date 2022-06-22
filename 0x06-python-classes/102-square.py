@@ -52,42 +52,42 @@ class Square:
 
         self.__size = value
 
-    def __operr_msg(self, instance):
-        msg = "'==' not supported between instances of '{:s}' and '{:s}'"
-        return msg.format(type(self).__name__, type(instance).__name__)
+    def __operr_msg(self, oper, instance):
+        msg = "'{:s}' not supported between instances of '{:s}' and '{:s}'"
+        return msg.format(oper, type(self).__name__, type(instance).__name__)
 
     def __eq__(self, instance):
         """square1 == square2"""
-        if type(instance) is not Square:
-            raise TypeError(self.__operr_msg(instance))
-        return self.area() == instance.area()
+        if instance is not None and type(instance) is not Square:
+            raise TypeError(self.__operr_msg('==', instance))
+        return instance is not None and self.area() == instance.area()
 
     def __ne__(self, instance):
         """square1 != square2"""
-        if type(instance) is not Square:
-            raise TypeError(self.__operr_msg(instance))
-        return self.area() != instance.area()
+        if instance is not None and type(instance) is not Square:
+            raise TypeError(self.__operr_msg('!=', instance))
+        return instance is None or self.area() != instance.area()
 
     def __gt__(self, instance):
         """square1 > square2"""
         if type(instance) is not Square:
-            raise TypeError(self.__operr_msg(instance))
+            raise TypeError(self.__operr_msg('>', instance))
         return self.area() > instance.area()
 
     def __ge__(self, instance):
         """square1 >= square2"""
         if type(instance) is not Square:
-            raise TypeError(self.__operr_msg(instance))
+            raise TypeError(self.__operr_msg('>=', instance))
         return self.area() >= instance.area()
 
     def __lt__(self, instance):
         """square1 < square2"""
         if type(instance) is not Square:
-            raise TypeError(self.__operr_msg(instance))
+            raise TypeError(self.__operr_msg('<', instance))
         return self.area() <= instance.area()
 
     def __le__(self, instance):
         """square1 <= square2"""
         if type(instance) is not Square:
-            raise TypeError(self.__operr_msg(instance))
+            raise TypeError(self.__operr_msg('<=', instance))
         return self.area() <= instance.area()
