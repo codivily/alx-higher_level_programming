@@ -79,9 +79,8 @@ class Square:
         if self.__size == 0:
             return "\n"
 
-        text = y + "#" * self.__size
+        text = y + x + "#" * self.__size
 
         for i in range(self.__size - 1):
             text += "\n" + x + "#" * self.__size
-
         return text
