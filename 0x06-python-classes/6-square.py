@@ -74,4 +74,4 @@ class Square:
         if self.__size == 0:
             x = 0
             y = 1
-        print("\n" * y + (" " * x + "#" * sz + "\n") * sz, end="") 
+        print("\n" * y + (" " * x + "#" * sz + "\n") * sz, end="")
