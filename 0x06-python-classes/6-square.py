@@ -69,13 +69,9 @@ class Square:
 
     def my_print(self):
         """Draw the square to the stdout"""
-        x = " " * self.__position[0]
-        y = "\n" * self.__position[1]
-
+        x, y = self.__position
+        sz = self.__size
         if self.__size == 0:
-            print()
-            return
-
-        print(y, end="")
-        for i in range(self.__size):
-            print(x + "#" * self.__size)
+            x = 0
+            y = 1
+        print("\n" * y + (" " * x + "#" * sz + "\n") * sz, end="") 
