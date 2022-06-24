@@ -71,7 +71,9 @@ class Square:
         """Draw the square to the stdout"""
         x, y = self.__position
         sz = self.__size
-        if self.__size == 0:
+
+        if sz == 0:
             x = 0
             y = 1
+
         print("\n" * y + (" " * x + "#" * sz + "\n") * sz, end="")

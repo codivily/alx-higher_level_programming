@@ -70,14 +70,10 @@ class Square:
 
     def __repr__(self):
         """Square to str"""
-        x = " " * self.__position[0]
-        y = "\n" * self.__position[1]
+        x, y = self.__position
+        sz = self.__size
 
-        if self.__size == 0:
+        if sz == 0:
             return ""
 
-        text = y + x + "#" * self.__size
-
-        for i in range(self.__size - 1):
-            text += "\n" + x + "#" * self.__size
-        return text
+        return "\n" * y + (" " * x + "#" * sz + "\n") * sz
