@@ -75,5 +75,5 @@ class Square:
 
         if sz == 0:
             return ""
-
-        return "\n" * y + (" " * x + "#" * sz + "\n") * sz
+        line = " " * x + "#" * sz
+        return "\n" * y + (line + "\n") * (sz - 1) + line
