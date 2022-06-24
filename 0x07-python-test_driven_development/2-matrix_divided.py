@@ -20,7 +20,7 @@ def matrix_divided(matrix, div):
     if div == 0:
         raise ZeroDivisionError("division by zero")
 
-    m_err = "matrix must be a matrix (list of lists) of integer/floats"
+    m_err = "matrix must be a matrix (list of lists) of integers/floats"
     if type(matrix) is not list:
         raise TypeError(m_err)
 
