@@ -1,8 +1,8 @@
 #include "Python.h"
 #include <ctype.h>
 
-PyAPI_FUNC(void) print_python_bytes(PyObject *p);
-PyAPI_FUNC(void) print_python_list(PyObject *p);
+PyAPI_FUNC(void) print_python_bytes(PyObject * p);
+PyAPI_FUNC(void) print_python_list(PyObject * p);
 
 /**
  * print_python_bytes - print some basic info about Python lists
@@ -18,13 +18,13 @@ void print_python_bytes(PyObject *p)
 	printf("[.] bytes object info\n");
 	if (!PyBytes_Check(p))
 	{
-		perror(" [ERROR] Invalid Bytes Object\n");
+		perror("  [ERROR] Invalid Bytes Object\n");
 		return;
 	}
 	sz = PyBytes_Size(p);
 	s = PyBytes_AsString(p);
-	printf(" size: %ld\n", sz);
-	printf(" trying string: ");
+	printf("  size: %ld\n", sz);
+	printf("  trying string: ");
 	for (i = 0; i < sz; i++)
 	{
 		printf("%c", *s);
