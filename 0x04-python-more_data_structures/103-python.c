@@ -1,5 +1,6 @@
 #include "Python.h"
 #include <ctype.h>
+#include <stdio.h>
 
 PyAPI_FUNC(void) print_python_bytes(PyObject * p);
 PyAPI_FUNC(void) print_python_list(PyObject * p);
@@ -18,7 +19,7 @@ void print_python_bytes(PyObject *p)
 	printf("[.] bytes object info\n");
 	if (!PyBytes_Check(p))
 	{
-		perror("  [ERROR] Invalid Bytes Object\n");
+		fprintf(stderr, "  [ERROR] Invalid Bytes Object\n");
 		return;
 	}
 	sz = PyBytes_Size(p);
