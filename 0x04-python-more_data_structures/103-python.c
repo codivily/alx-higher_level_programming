@@ -20,8 +20,8 @@ void print_python_bytes(PyObject *p)
 	printf("[.] bytes object info\n");
 	if (!PyBytes_Check(p))
 	{
-		fprintf(stderr, "  [ERROR] Invalid Bytes Object\n");
-		exit(EXIT_FAILURE);
+		fprintf(stderr, "  x[ERROR] Invalid Bytes Object\n");
+		return;
 	}
 	sz = PyBytes_Size(p);
 	s = PyBytes_AsString(p);
