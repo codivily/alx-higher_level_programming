@@ -21,7 +21,7 @@ void print_python_bytes(PyObject *p)
 	if (!PyBytes_Check(p))
 	{
 		fprintf(stderr, "  [ERROR] Invalid Bytes Object\n");
-		exit(-1);
+		return;
 	}
 	sz = PyBytes_Size(p);
 	s = PyBytes_AsString(p);
