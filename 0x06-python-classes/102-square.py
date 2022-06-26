@@ -84,7 +84,7 @@ class Square:
         """square1 < square2"""
         if type(instance) is not Square:
             raise TypeError(self.__operr_msg('<', instance))
-        return self.area() <= instance.area()
+        return self.area() < instance.area()
 
     def __le__(self, instance):
         """square1 <= square2"""
