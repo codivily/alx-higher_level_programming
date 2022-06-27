@@ -78,7 +78,7 @@ class Rectangle:
         if type(rect_2) is not Rectangle:
             raise TypeError("rect_2 must be an instance of Rectangle")
 
-        return rect_1 if rect_1.area() - react_2.area() >= 0 else rect_2
+        return rect_1 if rect_1.area() - rect_2.area() >= 0 else rect_2
 
     def __str__(self):
         """Returns a string represenation of a rectangle"""
