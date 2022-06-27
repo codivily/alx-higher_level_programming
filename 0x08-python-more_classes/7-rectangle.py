@@ -67,7 +67,7 @@ class Rectangle:
         text = ""
         w = self.__width
         h = self.__height
-        print_symbol = self.__class__.print_symbol
+        print_symbol = str(self.__class__.print_symbol)
 
         if h > 0:
             text = print_symbol * w
