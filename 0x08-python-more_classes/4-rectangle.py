@@ -57,3 +57,18 @@ class Rectangle:
     def perimeter(self):
         """Returns the permeter of the rectangle"""
         return 2 * (self.__height + self.__width)
+
+    def __str__(self):
+        """Returns a string represenation of a rectangle"""
+        text = ""
+        w = self.__width
+        h = self.__height
+
+        if h > 0:
+            text = "#" * w
+            h -= 1
+        return text + ("\n" + "#" * w) * h
+
+    def __repr__(self):
+        """Return a string representation of the rectangle"""
+        return "Rectangle({}, {})".format(self.__width, self.__height)
