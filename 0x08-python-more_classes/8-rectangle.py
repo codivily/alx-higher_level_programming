@@ -87,6 +87,10 @@ class Rectangle:
         text = ""
         w = self.__width
         h = self.__height
+
+        if h == 0 or w == 0:
+            return ""
+
         print_symbol = str(self.print_symbol)
 
         if h > 0:

@@ -69,6 +69,9 @@ class Rectangle:
         w = self.__width
         h = self.__height
 
+        if h == 0 or w == 0:
+            return ""
+
         if h > 0:
             text = "#" * w
             h -= 1
