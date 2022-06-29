@@ -30,6 +30,13 @@ class TestMaxInteger(unittest.TestCase):
         """Check if return's correct when list content a single item"""
         self.assertEqual(max_integer([1]), 1)
 
+    def test_one_negative_number_in_list(self):
+        """One negative number in the list"""
+        self.assertEqual(max_integer([1,2,3,-3]), 3)
+
+    def test_only_negative_numbers_in_list(self):
+        """Only negative numbers in the list"""
+        self.assertEqual(max_integer([-2, -1, -5, -4]), -1)
 
 if __name__ == "__main__":
     unittest.main()
