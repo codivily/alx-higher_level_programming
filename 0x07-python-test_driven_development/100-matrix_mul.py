@@ -25,6 +25,7 @@ def matrix_mul(m_a, m_b):
         raise ValueError("m_b can't be empty")
 
     rw_a_len = -1
+    cl_a_len = len(m_a)
     for rw_a in m_a:
         if rw_a_len == -1:
             rw_a_len = len(rw_a)
@@ -39,6 +40,7 @@ def matrix_mul(m_a, m_b):
         raise ValueError("m_a can't be empty")
 
     rw_b_len = -1
+    cl_b_len = len(m_b)
     for rw_b in m_b:
         if rw_b_len == -1:
             rw_b_len = len(rw_b)
@@ -52,11 +54,16 @@ def matrix_mul(m_a, m_b):
     if rw_b_len == 0:
         raise ValueError("m_b can't be empty")
 
-    if rw_a_len != len(m_b):
+    if rw_a_len == cl_b_len:
+        pass
+    elif rw_b_len == cl_a_len:
+        m_a, m_b = m_b, m_a
+        cl_a_len, cl_b_len = cl_b_len, cl_a_len
+        rw_a_len, rw_b_len = rw_b_len, rw_a_len
+    else:
         raise ValueError("m_a and m_b can't be multiplied")
 
     m = []
-    n_cl_b = len(m_b[0])
     for rw_a in m_a:
         rw_m = []
         for ci_b in range(len(m_b[0])):
