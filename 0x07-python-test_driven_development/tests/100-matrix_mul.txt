@@ -1,0 +1,41 @@
+>>> f = __import__('100-matrix_mul').matrix_mul
+>>> f(None, None)
+Traceback (most recent call last):
+	...
+TypeError: m_a must be a list
+>>> f([[1,2]], None)
+Traceback (most recent call last):
+	...
+TypeError: m_b must be a list
+>>> f([[]], [[1, 2]])
+Traceback (most recent call last):
+	...
+ValueError: m_a can't be empty
+>>> f([[1, 2]], [[], []])
+Traceback (most recent call last):
+	...
+ValueError: m_b can't be empty
+>>> f([[1, 2], [3, 4]], [[1, 2], [3, 4]])
+[[7, 10], [15, 22]]
+>>> f([[1, 2]], [[3,4], [5, 6]])
+[[13, 16]]
+>>> f([[1, 2], [3, 4, 5]], [[3,4], [5, 6]])
+Traceback (most recent call last):
+	...
+TypeError: each row of m_a must be of the same size
+>>> f([[1, 2], [3, 4]], [[3, 4, 0], [5, 6]])
+Traceback (most recent call last):
+	...
+TypeError: each row of m_b must be of the same size
+>>> f([[1, "e"], [3, 4]], [[1, 2], [3, 4]])
+Traceback (most recent call last):
+	...
+TypeError: m_a should contain only integers or floats
+>>> f([[1, 2], [3, 4]], [[1, "s"], [3, 4]])
+Traceback (most recent call last):
+	...
+TypeError: m_b should contain only integers or floats
+>>> f([[1, 2], [3, 4]], [[3,4], [5, 6], [84, 0]])
+Traceback (most recent call last):
+	...
+ValueError: m_a and m_b can't be multiplied
