@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 """``class_to_json`` module"""
 
-import json
-
 
 def class_to_json(obj):
     """Returns the dictionary description with simple data structures:
@@ -19,4 +17,4 @@ def class_to_json(obj):
         if type(value) in [list, dict, str, int, bool]:
             r[key] = value
 
-    return json.dumps(r)
+    return r
