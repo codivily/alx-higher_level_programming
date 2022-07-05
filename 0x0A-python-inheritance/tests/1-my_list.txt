@@ -2,6 +2,10 @@
 >>> my_list = MyList()
 >>> print(my_list)
 []
+>>> MyList(None)
+Traceback (most recent call last):
+	...
+TypeError: 'NoneType' object is not iterable
 >>> my_list.print_sorted()
 []
 >>> my_list.extend([1, 4, 2, 3, 5])
