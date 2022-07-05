@@ -37,3 +37,8 @@ class Rectangle(BaseGeometry):
     def area(self):
         """``area`` method implemenation for Rectangle"""
         return self.__width * self.__height
+
+    def __str__(self):
+        """Returns a string description of the Rectangle"""
+        return "[{}] {}/{}".format(
+                self.__class__.__name__, self.__width, self.__height)
