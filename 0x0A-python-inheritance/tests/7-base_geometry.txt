@@ -44,4 +44,8 @@ TypeError: w must be an integer
 Traceback (most recent call last):
 	...
 TypeError: w must be an integer
+>>> bg.integer_validator("w", (4,))
+Traceback (most recent call last):
+	...
+TypeError: w must be an integer
 >>> bg.integer_validator("length", 10)
