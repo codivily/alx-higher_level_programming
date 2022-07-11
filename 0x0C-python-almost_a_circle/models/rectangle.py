@@ -98,12 +98,8 @@ class Rectangle(Base):
             Prints in stdout the Rectangle instance
             With the character `#`.
         """
-        if self.__width == 0:
-            print()
-            return
-        text = "\n" * self.__y +\
-            (" " * self.__x + "#" * self.__width + "\n") * self.__height
-        print(text, end="")
+        x, y, w, h = self.x, self.y, self.width, self.height
+        print("\n" * y + (" " * x + "#" * w + "\n") * h, end="")
 
     def __str__(self):
         """
