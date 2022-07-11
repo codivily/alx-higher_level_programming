@@ -31,8 +31,8 @@ class Square(Rectangle):
     @size.setter
     def size(self, value):
         """Sets the `width` and `height` of the Square"""
-        super(Square, self).width = value
-        super(Square, self).height = value
+        self.width = value
+        self.height = value
 
     def update(self, *args, **kwargs):
         """Update the instance's attributes"""
