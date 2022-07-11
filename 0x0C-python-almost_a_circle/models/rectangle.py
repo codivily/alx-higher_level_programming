@@ -117,31 +117,29 @@ class Rectangle(Base):
         """Assigns an argument to each attribute"""
         attrs = ("id", "width", "height", "x", "y")
         if args:
-            len_attrs = len(attrs)
             len_args = len(args)
+            len_attrs = len(attrs)
+
             if len_args > len_attrs:
                 msg = "update() takes at max {} positional arguments"\
                         " but {} were given"
                 raise TypeError(msg.format(len_attrs, len_args))
 
-            for i in range(min(len_attrs, len_args)):
-                k = attrs[i]
-                v = args[i]
-
+            for i in range(len_args):
                 setattr(self, attrs[i], args[i])
         else:
             for k in kwargs:
                 if k not in attrs:
                     msg = "update() got an unexpected keyword argument '{}'"
                     raise TypeError(msg.format(k))
+
                 setattr(self, k, kwargs.get(k))
 
     def to_dictionary(self):
         """Returns the ditionary representation of a Rectangle"""
-        d = {}
-        d['id'] = self.id
-        d['width'] = self.width
-        d['height'] = self.height
-        d['x'] = self.x
-        d['y'] = self.y
+        return {'id': self.id,
+                'width': self.width,
+                'height': self.height,
+                'x': self.x,
+                'y': self.y}
         return d

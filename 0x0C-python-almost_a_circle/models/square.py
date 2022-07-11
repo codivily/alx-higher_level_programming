@@ -38,38 +38,25 @@ class Square(Rectangle):
         """Update the instance's attributes"""
         attrs = ("id", "size", "x", "y")
         if args:
-            len_attrs = len(attrs)
             len_args = len(args)
+            len_attrs = len(attrs)
             if len_args > len_attrs:
                 msg = "update() takes at max {} positional arguments"\
                         " but {} were given"
                 raise TypeError(msg.format(len_attrs, len_args))
 
-            for i in range(min(len(attrs), len(args))):
-                k = attrs[i]
-                v = args[i]
-                if k == 'size':
-                    setattr(self, 'width', v)
-                    setattr(self, 'height', v)
-                else:
-                    setattr(self, k, v)
+            for i in range(len_args):
+                setattr(self, attrs[i], args[i])
         else:
             for k in kwargs:
                 if k not in attrs:
                     msg = "update() got an unexpected keyword argument '{}'"
                     raise TypeError(msg.format(k))
-                v = kwargs.get(k)
-                if k == 'size':
-                    setattr(self, 'width', v)
-                    setattr(self, 'height', v)
-                else:
-                    setattr(self, k, v)
+                setattr(self, k, kwargs.get(k))
 
     def to_dictionary(self):
         """Returns the dictionary representation of a Square"""
-        d = {}
-        d['id'] = self.id
-        d['size'] = self.size
-        d['x'] = self.x
-        d['y'] = self.y
-        return d
+        return {'id': self.id,
+                'size': self.size,
+                'x': self.x,
+                'y': self.y}
