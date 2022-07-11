@@ -84,12 +84,10 @@ class Base:
         with open(filename, "r", encoding="utf-8") as f:
             for line in f:
                 arguments = line[:-1].split(",")
-                o = cls(1,1)
+                o = cls(1, 1)
                 o.update(*[int(x) for x in arguments])
                 list_objs.append(o)
         return list_objs
-
-
 
     @classmethod
     def create(cls, **dictionary):
