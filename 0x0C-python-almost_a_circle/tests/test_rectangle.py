@@ -266,10 +266,68 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(type(rects) is list, True)
         self.assertEqual(rects, [])
 
+        '''single item saving'''
+        Rectangle.save_to_file([Rectangle(10, 10, 10, 10)])
+
         rect_1 = Rectangle(10, 7, 2, 8)
         rect_2 = Rectangle(2, 4)
         Rectangle.save_to_file([rect_1, rect_2])
 
         rects = Rectangle.load_from_file()
         self.assertEqual(rect_1.id, rects[0].id)
+        self.assertEqual(rect_1.width, rects[0].width)
+        self.assertEqual(rect_1.height, rects[0].height)
+        self.assertEqual(rect_1.x, rects[0].x)
+        self.assertEqual(rect_1.y, rects[0].y)
+
         self.assertEqual(rect_2.id, rects[1].id)
+        self.assertEqual(rect_2.width, rects[1].width)
+        self.assertEqual(rect_2.height, rects[1].height)
+        self.assertEqual(rect_2.x, rects[1].x)
+        self.assertEqual(rect_2.y, rects[1].y)
+
+    def test_save_to_file_csv_classmethod(self):
+        """Test ``save_to_file_csv`` classmethod on Rectangle"""
+        Rectangle.save_to_file_csv(None)
+
+        rect_1 = Rectangle(10, 7, 2, 8)
+        rect_2 = Rectangle(2, 4)
+        Rectangle.save_to_file_csv([rect_1, rect_2])
+
+    def test_load_from_file_csv_classmethod(self):
+        """Test ``load_from_file_csv`` classmethod on Rectangle"""
+
+        if os.path.exists('Rectangle.csv'):
+            os.remove('Rectangle.csv')
+
+        rects = Rectangle.load_from_file_csv()
+        self.assertEqual(type(rects) is list, True)
+        self.assertEqual(rects, [])
+
+        '''single item saving'''
+        Rectangle.save_to_file_csv([Rectangle(10, 10, 10, 10)])
+
+        rect_1 = Rectangle(10, 7, 2, 8)
+        rect_2 = Rectangle(2, 4)
+        Rectangle.save_to_file_csv([rect_1, rect_2])
+
+        rects = Rectangle.load_from_file_csv()
+        self.assertEqual(rect_1.id, rects[0].id)
+        self.assertEqual(rect_1.width, rects[0].width)
+        self.assertEqual(rect_1.height, rects[0].height)
+        self.assertEqual(rect_1.x, rects[0].x)
+        self.assertEqual(rect_1.y, rects[0].y)
+
+        self.assertEqual(rect_2.id, rects[1].id)
+        self.assertEqual(rect_2.width, rects[1].width)
+        self.assertEqual(rect_2.height, rects[1].height)
+        self.assertEqual(rect_2.x, rects[1].x)
+        self.assertEqual(rect_2.y, rects[1].y)
+
+    def test_save_to_file_csv_classmethod(self):
+        """Test ``save_to_file_csv`` classmethod on Rectangle"""
+        Rectangle.save_to_file_csv(None)
+
+        rect_1 = Rectangle(10, 7, 2, 8)
+        rect_2 = Rectangle(2, 4)
+        Rectangle.save_to_file_csv([rect_1, rect_2])

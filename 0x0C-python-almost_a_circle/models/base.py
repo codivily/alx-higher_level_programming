@@ -71,6 +71,9 @@ class Base:
     @classmethod
     def save_to_file_csv(cls, list_objs):
         """Serializes to csv a list of instances"""
+        if list_objs is None:
+            list_objs = []
+
         filename = "{}.csv".format(cls.__name__)
         attrs = ('id', 'size', 'width', 'height', 'x', 'y')
         with open(filename, "w", encoding="utf-8") as f:

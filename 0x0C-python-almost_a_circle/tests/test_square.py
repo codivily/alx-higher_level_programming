@@ -185,44 +185,6 @@ class TestSquare(unittest.TestCase):
         for k, v in tups:
             self.assertEqual(sqr_dict.get(k), sqr_dict_2.get(k))
 
-    def test_save_to_file_classmethod(self):
-        """Test ``save_to_file`` classmethod on Square"""
-        Square.save_to_file(None)
-
-        saved = ""
-        with open('Square.json', 'r', encoding="utf-8") as f:
-            saved = f.read()
-        self.assertEqual(saved, "[]")
-
-        sqr_1 = Square(5)
-        sqr_2 = Square(7, 9, 1)
-        Square.save_to_file([sqr_1, sqr_2])
-
-        with open('Square.json', 'r', encoding='utf-8') as f:
-            saved = f.read()
-
-        self.assertEqual(len(saved), 78)
-
-    def test_load_from_file_classmethod(self):
-        """Test ``load_from_file`` classmethod on Square"""
-
-        if os.path.exists('Square.json'):
-            os.remove('Square.json')
-        sqrs = Square.load_from_file()
-        self.assertEqual(type(sqrs) is list, True)
-        self.assertEqual(sqrs, [])
-
-        if len(sqrs) > 0:
-            for sqr in sqrs:
-                self.assertEqual(isinstance(sqr, Square), True)
-
-        sqr_1 = Square(5)
-        sqr_2 = Square(7, 9, 1)
-        Square.save_to_file([sqr_1, sqr_2])
-        sqrs = Square.load_from_file()
-        self.assertEqual(sqr_1.id, sqrs[0].id)
-        self.assertEqual(sqr_2.id, sqrs[1].id)
-
     def test_create_class_method(self):
         """Test ``create`` class method on Rectangle"""
         sqr = Square.create(**{'size': 2})
@@ -245,3 +207,83 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(sqr.x, 1)
         self.assertEqual(sqr.y, 3)
         self.assertEqual(sqr.id, 89)
+
+    def test_save_to_file_classmethod(self):
+        """Test ``save_to_file`` classmethod on Square"""
+        Square.save_to_file(None)
+
+        saved = ""
+        with open('Square.json', 'r', encoding="utf-8") as f:
+            saved = f.read()
+        self.assertEqual(saved, "[]")
+
+        '''single item saving'''
+        Square.save_to_file([Square(10)])
+
+        sqr_1 = Square(5)
+        sqr_2 = Square(7, 9, 1)
+        Square.save_to_file([sqr_1, sqr_2])
+
+        with open('Square.json', 'r', encoding='utf-8') as f:
+            saved = f.read()
+
+        self.assertEqual(len(saved), 78)
+
+    def test_load_from_file_classmethod(self):
+        """Test ``load_from_file`` classmethod on Square"""
+
+        if os.path.exists('Square.json'):
+            os.remove('Square.json')
+        sqrs = Square.load_from_file()
+        self.assertEqual(type(sqrs) is list, True)
+        self.assertEqual(sqrs, [])
+
+        sqr_1 = Square(5)
+        sqr_2 = Square(7, 9, 1)
+        Square.save_to_file([sqr_1, sqr_2])
+
+        sqrs = Square.load_from_file()
+        self.assertEqual(sqr_1.id, sqrs[0].id)
+        self.assertEqual(sqr_1.size, sqrs[0].size)
+        self.assertEqual(sqr_1.x, sqrs[0].x)
+        self.assertEqual(sqr_1.y, sqrs[0].y)
+
+        self.assertEqual(sqr_2.id, sqrs[1].id)
+        self.assertEqual(sqr_2.size, sqrs[1].size)
+        self.assertEqual(sqr_2.x, sqrs[1].x)
+        self.assertEqual(sqr_2.y, sqrs[1].y)
+
+    def test_save_to_file_csv_classmethod(self):
+        """Test ``save_to_file_csv`` classmethod on Square"""
+        Square.save_to_file_csv(None)
+
+        '''single item saving'''
+        Square.save_to_file_csv([Square(10)])
+
+        sqr_1 = Square(5)
+        sqr_2 = Square(7, 9, 1)
+        Square.save_to_file_csv([sqr_1, sqr_2])
+
+    def test_load_from_file_csv_classmethod(self):
+        """Test ``load_from_file_csv`` classmethod on Square"""
+
+        if os.path.exists('Square.csv'):
+            os.remove('Square.csv')
+        sqrs = Square.load_from_file_csv()
+        self.assertEqual(type(sqrs) is list, True)
+        self.assertEqual(sqrs, [])
+
+        sqr_1 = Square(5)
+        sqr_2 = Square(7, 9, 1)
+        Square.save_to_file_csv([sqr_1, sqr_2])
+
+        sqrs = Square.load_from_file_csv()
+        self.assertEqual(sqr_1.id, sqrs[0].id)
+        self.assertEqual(sqr_1.size, sqrs[0].size)
+        self.assertEqual(sqr_1.x, sqrs[0].x)
+        self.assertEqual(sqr_1.y, sqrs[0].y)
+
+        self.assertEqual(sqr_2.id, sqrs[1].id)
+        self.assertEqual(sqr_2.size, sqrs[1].size)
+        self.assertEqual(sqr_2.x, sqrs[1].x)
+        self.assertEqual(sqr_2.y, sqrs[1].y)
