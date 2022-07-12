@@ -96,6 +96,7 @@ class Base:
     def create(cls, **dictionary):
         """Returns an instance with all attributes already set"""
         instance = cls(1, 1)
-        default_d = {'x': 0, 'y': 0}
-        instance.update(**(default_d | dictionary))
+        instance.x = 0
+        instance.y = 0
+        instance.update(**dictionary)
         return instance
