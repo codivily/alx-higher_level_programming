@@ -214,21 +214,20 @@ class TestSquare(unittest.TestCase):
 
     def test_create_class_method(self):
         """Test ``create`` class method on Rectangle"""
-        sqr = Square.create(**{'id': 89})
-        self.assertEqual(sqr.id, 89)
+        sqr = Square.create(**{'size': 2})
+        self.assertEqual(sqr.size, 2)
 
-        sqr = Square.create(**{'id': 89, 'size': 1})
-        self.assertEqual(sqr.id, 89)
-        self.assertEqual(sqr.size, 1)
+        sqr = Square.create(**{'size': 2, 'x': 1})
+        self.assertEqual(sqr.size, 2)
+        self.assertEqual(sqr.x, 1)
 
-        sqr = Square.create(**{'id': 89, 'size': 1, 'x': 3})
-        self.assertEqual(sqr.id, 89)
-        self.assertEqual(sqr.size, 1)
-        self.assertEqual(sqr.x, 3)
+        sqr = Square.create(**{'size': 2, 'x': 1, 'y': 3})
+        self.assertEqual(sqr.size, 2)
+        self.assertEqual(sqr.x, 1)
+        self.assertEqual(sqr.y, 3)
 
-        sqr = Square.create(
-                **{'id': 89, 'size': 1, 'x': 3, 'y': 4})
+        sqr = Square.create(**{'size': 2, 'x': 1, 'y': 3, 'id': 89})
+        self.assertEqual(sqr.size, 2)
+        self.assertEqual(sqr.x, 1)
+        self.assertEqual(sqr.y, 3)
         self.assertEqual(sqr.id, 89)
-        self.assertEqual(sqr.size, 1)
-        self.assertEqual(sqr.x, 3)
-        self.assertEqual(sqr.y, 4)
