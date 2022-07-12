@@ -6,6 +6,7 @@ from models.rectangle import Rectangle
 from models.base import Base
 import contextlib
 import io
+import os
 
 
 class TestRectangle(unittest.TestCase):
@@ -258,9 +259,17 @@ class TestRectangle(unittest.TestCase):
     def test_load_from_file_classmethod(self):
         """Test ``load_from_file`` classmethod on Rectangle"""
 
+        if os.path.exists('Rectangle.json'):
+            os.remove('Rectangle.json')
+
         rects = Rectangle.load_from_file()
         self.assertEqual(type(rects) is list, True)
+        self.assertEqual(rects, [])
 
-        if len(rects) > 0:
-            for rect in rects:
-                self.assertEqual(isinstance(rect, Rectangle), True)
+        rect_1 = Rectangle(10, 7, 2, 8)
+        rect_2 = Rectangle(2, 4)
+        Rectangle.save_to_file([rect_1, rect_2])
+
+        rects = Rectangle.load_from_file()
+        self.assertEqual(rect_1.id, rects[0].id)
+        self.assertEqual(rect_2.id, rects[1].id)

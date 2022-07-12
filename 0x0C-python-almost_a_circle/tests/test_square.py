@@ -6,6 +6,7 @@ from models.rectangle import Rectangle
 from models.square import Square
 import contextlib
 import io
+import os
 
 
 class TestSquare(unittest.TestCase):
@@ -193,9 +194,9 @@ class TestSquare(unittest.TestCase):
             saved = f.read()
         self.assertEqual(saved, "[]")
 
-        rect_1 = Square(10, 7, 2, 8)
-        rect_2 = Square(2, 4)
-        Square.save_to_file([rect_1, rect_2])
+        sqr_1 = Square(5)
+        sqr_2 = Square(7, 9, 1)
+        Square.save_to_file([sqr_1, sqr_2])
 
         with open('Square.json', 'r', encoding='utf-8') as f:
             saved = f.read()
@@ -205,12 +206,22 @@ class TestSquare(unittest.TestCase):
     def test_load_from_file_classmethod(self):
         """Test ``load_from_file`` classmethod on Square"""
 
+        if os.path.exists('Square.json'):
+            os.remove('Square.json')
         sqrs = Square.load_from_file()
         self.assertEqual(type(sqrs) is list, True)
+        self.assertEqual(sqrs, [])
 
         if len(sqrs) > 0:
             for sqr in sqrs:
                 self.assertEqual(isinstance(sqr, Square), True)
+
+        sqr_1 = Square(5)
+        sqr_2 = Square(7, 9, 1)
+        Square.save_to_file([sqr_1, sqr_2])
+        sqrs = Square.load_from_file()
+        self.assertEqual(sqr_1.id, sqrs[0].id)
+        self.assertEqual(sqr_2.id, sqrs[1].id)
 
     def test_create_class_method(self):
         """Test ``create`` class method on Rectangle"""

@@ -2,6 +2,7 @@
 """``Base`` class module"""
 
 import json
+import os
 
 
 class Base:
@@ -57,6 +58,10 @@ class Base:
     def load_from_file(cls):
         """Returns a list of instances"""
         filename = "{}.json".format(cls.__name__)
+
+        if not os.path.exists(filename):
+            return []
+
         ret = []
         with open(filename, "r", encoding="utf-8") as f:
             list_dicts = cls.from_json_string(f.read())
@@ -83,6 +88,10 @@ class Base:
     def load_from_file_csv(cls):
         """deserializes CSV"""
         filename = "{}.csv".format(cls.__name__)
+
+        if not os.path.exists(filename):
+            return []
+
         list_objs = []
         with open(filename, "r", encoding="utf-8") as f:
             for line in f:
