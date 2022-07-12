@@ -11,7 +11,6 @@ import io
 class TestRectangle(unittest.TestCase):
     """Test cases for the `Rectangle` class"""
 
-
     def test_inheritance(self):
         """Check if Rectangle class inherit from Base class"""
         self.assertEqual(issubclass(Rectangle, Base), True)
@@ -21,15 +20,15 @@ class TestRectangle(unittest.TestCase):
 
         with self.assertRaises(TypeError) as cm:
             rect = Rectangle()
-        except_msg = "__init__() missing 2 required positional arguments:"\
-                " 'width' and 'height'"
+        except_msg = "__init__() missing 2 required positional arguments: "\
+                    "'width' and 'height'"
         self.assertEqual(str(cm.exception),except_msg)
 
         with self.assertRaises(TypeError) as cm:
             rect = Rectangle(10)
         except_msg = "__init__() missing 1 required positional argument: 'height'"
         self.assertEqual(str(cm.exception), except_msg)
-        
+
     def test_normal_creation(self):
         """Test normal instantiation"""
         rect = Rectangle(10, 51)
@@ -68,7 +67,6 @@ class TestRectangle(unittest.TestCase):
         except_msg = "height must be > 0"
         self.assertEqual(str(cm.exception), except_msg)
 
-
     def test_position_attributes_validation(self):
         """Test `x` and `y` validation"""
 
@@ -91,7 +89,6 @@ class TestRectangle(unittest.TestCase):
             rect = Rectangle(1, 1, 0, -1)
         except_msg = "y must be >= 0"
         self.assertEqual(str(cm.exception), except_msg)
-
 
     def test_area_method(self):
         """Test area method"""
@@ -117,7 +114,7 @@ class TestRectangle(unittest.TestCase):
                 rect = Rectangle(2, 2)
                 rect.display()
             out = "#\n" + ("#" * 5 + "\n") * 10 + ("#" * 2 + "\n") * 2
-            self.assertEqual(buf.getvalue(), out) 
+            self.assertEqual(buf.getvalue(), out)
 
     def test_display_on_position_change(self):
         """Test display when position `x` and `y` changes"""
@@ -132,7 +129,7 @@ class TestRectangle(unittest.TestCase):
                 rect = Rectangle(2, 2)
                 rect.display()
             out = "\n\n  #\n" + ("  " + "#" * 5 + "\n") * 10 + ("#" * 2 + "\n") * 2
-            self.assertEqual(buf.getvalue(), out) 
+            self.assertEqual(buf.getvalue(), out)
 
     def test_magic_str_method(self):
         """Test magic `__str__` method"""
@@ -143,14 +140,13 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(rect.__str__(),
                 "[Rectangle] ({}) 1/0 - 5/5".format(rect.id))
 
-
     def test_update_with_args(self):
         """Test update method with *args"""
         rect = Rectangle(10, 10, 10, 10)
 
         self.assertEqual(rect.__str__(),
-                "[Rectangle] ({}) 10/10 - 10/10".format(rect.id)) 
-        
+                "[Rectangle] ({}) 10/10 - 10/10".format(rect.id))
+       
         rect.update(89)
         self.assertEqual(rect.__str__(), "[Rectangle] (89) 10/10 - 10/10")
 
@@ -169,10 +165,10 @@ class TestRectangle(unittest.TestCase):
         with self.assertRaises(TypeError) as cm:
             rect.update(89, 2, 3, 4, 5, 6)
         except_msg = "update() takes at max 5 positional arguments but 6 were given"
-        self.assertEqual(str(cm.exception), except_msg) 
-        
+        self.assertEqual(str(cm.exception), except_msg)
+
     def test_update_with_kwargs(self):
-        """Test update moethod with **kwargs""" 
+        """Test update moethod with **kwargs"""
         rect = Rectangle(10, 10, 10, 10, 1)
 
         self.assertEqual(rect.__str__(),
@@ -195,7 +191,6 @@ class TestRectangle(unittest.TestCase):
         except_msg = "update() got an unexpected keyword argument 'xyz'"
         self.assertEqual(str(cm.exception), except_msg)
 
-
     def test_to_dictionary_method(self):
         """Test to_dictionary method"""
         rect = Rectangle(10, 2, 1, 9, 1)
@@ -211,3 +206,49 @@ class TestRectangle(unittest.TestCase):
         rect_dict_2 = rect.to_dictionary()
         for k, v in tups:
             self.assertEqual(rect_dict.get(k), rect_dict_2.get(k))
+
+    def test_create_class_method(self):
+        """Test ``create`` class method on Rectangle"""
+        rect = Rectangle.create(**{'id': 89})
+        self.assertEqual(rect.id, 89)
+
+        rect = Rectangle.create(**{'id': 89, 'width': 1})
+        self.assertEqual(rect.id, 89)
+        self.assertEqual(rect.width, 1)
+
+        rect = Rectangle.create(**{'id': 89, 'width': 1, 'height': 2})
+        self.assertEqual(rect.id, 89)
+        self.assertEqual(rect.width, 1)
+        self.assertEqual(rect.height, 2)
+
+        rect = Rectangle.create(**{'id': 89, 'width': 1, 'height': 2, 'x': 3})
+        self.assertEqual(rect.id, 89)
+        self.assertEqual(rect.width, 1)
+        self.assertEqual(rect.height, 2)
+        self.assertEqual(rect.x, 3)
+
+        rect = Rectangle.create(
+                **{'id': 89, 'width': 1, 'height': 2, 'x': 3, 'y': 4})
+        self.assertEqual(rect.id, 89)
+        self.assertEqual(rect.width, 1)
+        self.assertEqual(rect.height, 2)
+        self.assertEqual(rect.x, 3)
+        self.assertEqual(rect.y, 4)
+
+    def test_save_to_file_classmethod(self):
+        """Test ``save_to_file`` classmethod on Rectangle"""
+        Rectangle.save_to_file(None)
+
+        saved = ""
+        with open('Rectangle.json', 'r', encoding="utf-8") as f:
+                saved = f.read()
+        self.assertEqual(saved, "[]")
+
+        rect_1 = Rectangle(10, 7, 2, 8)
+        rect_2 = Rectangle(2, 4)
+        Rectangle.save_to_file([rect_1, rect_2])
+
+        with open('Rectangle.json', 'r', encoding='utf-8') as f:
+            saved = f.read()
+
+        self.assertEqual(len(saved), 107)
