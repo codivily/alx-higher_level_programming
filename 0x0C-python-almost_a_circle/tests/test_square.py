@@ -216,10 +216,13 @@ class TestSquare(unittest.TestCase):
         """Test ``create`` class method on Rectangle"""
         sqr = Square.create(**{'size': 2})
         self.assertEqual(sqr.size, 2)
+        self.assertEqual(sqr.x, 0)
+        self.assertEqual(sqr.y, 0)
 
         sqr = Square.create(**{'size': 2, 'x': 1})
         self.assertEqual(sqr.size, 2)
         self.assertEqual(sqr.x, 1)
+        self.assertEqual(sqr.y, 0)
 
         sqr = Square.create(**{'size': 2, 'x': 1, 'y': 3})
         self.assertEqual(sqr.size, 2)
