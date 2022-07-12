@@ -252,3 +252,7 @@ class TestRectangle(unittest.TestCase):
             saved = f.read()
 
         self.assertEqual(len(saved), 107)
+
+    def test_load_from_file_classmethod(self):
+        """Test ``load_from_file`` classmethod on Rectangle"""
+        pass
