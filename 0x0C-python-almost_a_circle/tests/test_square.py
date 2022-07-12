@@ -181,3 +181,53 @@ class TestSquare(unittest.TestCase):
         sqr_dict_2 = sqr.to_dictionary()
         for k, v in tups:
             self.assertEqual(sqr_dict.get(k), sqr_dict_2.get(k))
+
+    def test_save_to_file_classmethod(self):
+        """Test ``save_to_file`` classmethod on Square"""
+        Square.save_to_file(None)
+
+        saved = ""
+        with open('Square.json', 'r', encoding="utf-8") as f:
+                saved = f.read()
+        self.assertEqual(saved, "[]")
+
+        rect_1 = Square(10, 7, 2, 8)
+        rect_2 = Square(2, 4)
+        Square.save_to_file([rect_1, rect_2])
+
+        with open('Square.json', 'r', encoding='utf-8') as f:
+            saved = f.read()
+
+        self.assertEqual(len(saved), 78)
+
+    def test_load_from_file_classmethod(self):
+        """Test ``load_from_file`` classmethod on Square"""
+
+        sqrs = Square.load_from_file()
+        self.assertEqual(type(sqrs) is list, True)
+
+        if len(sqrs) > 0:
+            for sqr in sqrs:
+                self.assertEqual(isinstance(sqr, Square), True)
+
+    def test_create_class_method(self):
+        """Test ``create`` class method on Rectangle"""
+        sqr = Square.create(**{'id': 89})
+        self.assertEqual(sqr.id, 89)
+
+        sqr = Square.create(**{'id': 89, 'size': 1})
+        self.assertEqual(sqr.id, 89)
+        self.assertEqual(sqr.size, 1)
+
+        sqr = Square.create(**{'id': 89, 'size': 1, 'x': 3})
+        self.assertEqual(sqr.id, 89)
+        self.assertEqual(sqr.size, 1)
+        self.assertEqual(sqr.x, 3)
+
+        sqr = Square.create(
+                **{'id': 89, 'size': 1, 'x': 3, 'y': 4})
+        self.assertEqual(sqr.id, 89)
+        self.assertEqual(sqr.size, 1)
+        self.assertEqual(sqr.x, 3)
+        self.assertEqual(sqr.y, 4)
+

@@ -255,4 +255,10 @@ class TestRectangle(unittest.TestCase):
 
     def test_load_from_file_classmethod(self):
         """Test ``load_from_file`` classmethod on Rectangle"""
-        pass
+
+        rects = Rectangle.load_from_file()
+        self.assertEqual(type(rects) is list, True)
+
+        if len(rects) > 0:
+            for rect in rects:
+                self.assertEqual(isinstance(rect, Rectangle), True)
