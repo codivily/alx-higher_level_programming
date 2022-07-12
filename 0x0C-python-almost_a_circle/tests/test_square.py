@@ -11,7 +11,6 @@ import io
 class TestSquare(unittest.TestCase):
     """Test cases for the `Square` class"""
 
-
     def test_inheritance(self):
         """Check if Square class inherit from Base class"""
         self.assertEqual(issubclass(Square, Rectangle), True)
@@ -20,9 +19,10 @@ class TestSquare(unittest.TestCase):
         """Check required positional argument existance"""
         with self.assertRaises(TypeError) as cm:
             sqr = Square()
-        except_msg = "__init__() missing 1 required positional argument: 'size'"
+        except_msg = "__init__() missing 1 required positional "\
+            "argument: 'size'"
         self.assertEqual(str(cm.exception), except_msg)
-        
+
     def test_normal_creation(self):
         """Test normal instantiation"""
         sqr = Square(10)
@@ -53,14 +53,18 @@ class TestSquare(unittest.TestCase):
 
     def test_position_attributes_validation(self):
         """Test `x` and `y` validation"""
+        with self.assertRaises(ValueError) as cm:
+            sqr = Square(-1)
+        except_msg = "width must be > 0"
+        self.assertEqual(str(cm.exception), except_msg)
 
         with self.assertRaises(TypeError) as cm:
-            sqr = Square(1,"0")
+            sqr = Square(1, "0")
         except_msg = "x must be an integer"
         self.assertEqual(str(cm.exception), except_msg)
 
         with self.assertRaises(ValueError) as cm:
-            sqr = Square(1,-1)
+            sqr = Square(1, -1)
         except_msg = "x must be >= 0"
         self.assertEqual(str(cm.exception), except_msg)
 
@@ -70,10 +74,9 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(str(cm.exception), except_msg)
 
         with self.assertRaises(ValueError) as cm:
-            sqr = Square(1,0, -1)
+            sqr = Square(1, 0, -1)
         except_msg = "y must be >= 0"
         self.assertEqual(str(cm.exception), except_msg)
-
 
     def test_area_method(self):
         """Test area method"""
@@ -99,7 +102,7 @@ class TestSquare(unittest.TestCase):
                 sqr = Square(2)
                 sqr.display()
             out = "#\n" + ("#" * 5 + "\n") * 5 + ("#" * 2 + "\n") * 2
-            self.assertEqual(buf.getvalue(), out) 
+            self.assertEqual(buf.getvalue(), out)
 
     def test_display_on_position_change(self):
         """Test display when position `x` and `y` changes"""
@@ -113,8 +116,9 @@ class TestSquare(unittest.TestCase):
 
                 sqr = Square(2)
                 sqr.display()
-            out = "\n\n  #\n" + ("  " + "#" * 5 + "\n") * 5 + ("#" * 2 + "\n") * 2
-            self.assertEqual(buf.getvalue(), out) 
+            out = "\n\n  #\n" + ("  " + "#" * 5 + "\n") * 5 +\
+                ("#" * 2 + "\n") * 2
+            self.assertEqual(buf.getvalue(), out)
 
     def test_magic_str_method(self):
         """Test magic `__str__` method"""
@@ -122,17 +126,16 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(sqr.__str__(), "[Square] (12) 2/1 - 4")
 
         sqr = Square(5, 1)
-        self.assertEqual(sqr.__str__(),
-                "[Square] ({}) 1/0 - 5".format(sqr.id))
-
+        msg = "[Square] ({}) 1/0 - 5".format(sqr.id)
+        self.assertEqual(sqr.__str__(), msg)
 
     def test_update_with_args(self):
         """Test update method with *args"""
         sqr = Square(5)
 
-        self.assertEqual(sqr.__str__(),
-                "[Square] ({}) 0/0 - 5".format(sqr.id)) 
-        
+        msg = "[Square] ({}) 0/0 - 5".format(sqr.id)
+        self.assertEqual(sqr.__str__(), msg)
+
         sqr.update(10)
         self.assertEqual(sqr.__str__(), "[Square] (10) 0/0 - 5")
 
@@ -145,15 +148,14 @@ class TestSquare(unittest.TestCase):
         with self.assertRaises(TypeError) as cm:
             sqr.update(1, 2, 3, 4, 5)
         except_msg = "update() takes at max 4 positional arguments"\
-                " but 5 were given" 
+            " but 5 were given"
         self.assertEqual(str(cm.exception), except_msg)
 
     def test_update_with_kwargs(self):
-        """Test update moethod with **kwargs""" 
+        """Test update moethod with **kwargs"""
         sqr = Square(5, 0, 0, 1)
 
-        self.assertEqual(sqr.__str__(),
-                "[Square] (1) 0/0 - 5")
+        self.assertEqual(sqr.__str__(), "[Square] (1) 0/0 - 5")
 
         sqr.update(size=1)
         self.assertEqual(sqr.__str__(), "[Square] (1) 0/0 - 1")
@@ -176,7 +178,7 @@ class TestSquare(unittest.TestCase):
         for k, v in tups:
             self.assertEqual(sqr_dict.get(k), v)
 
-        sqr = Square(1,1)
+        sqr = Square(1, 1)
         sqr.update(**sqr_dict)
         sqr_dict_2 = sqr.to_dictionary()
         for k, v in tups:
@@ -188,7 +190,7 @@ class TestSquare(unittest.TestCase):
 
         saved = ""
         with open('Square.json', 'r', encoding="utf-8") as f:
-                saved = f.read()
+            saved = f.read()
         self.assertEqual(saved, "[]")
 
         rect_1 = Square(10, 7, 2, 8)
@@ -230,4 +232,3 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(sqr.size, 1)
         self.assertEqual(sqr.x, 3)
         self.assertEqual(sqr.y, 4)
-

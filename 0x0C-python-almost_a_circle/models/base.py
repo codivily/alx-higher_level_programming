@@ -59,7 +59,7 @@ class Base:
         filename = "{}.json".format(cls.__name__)
         ret = []
         with open(filename, "r", encoding="utf-8") as f:
-            list_dicts = cls.from_json_string(f.read()) 
+            list_dicts = cls.from_json_string(f.read())
             ret = [cls.create(**d) for d in list_dicts]
         return ret
 

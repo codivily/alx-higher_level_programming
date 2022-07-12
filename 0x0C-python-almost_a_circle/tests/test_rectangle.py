@@ -21,12 +21,13 @@ class TestRectangle(unittest.TestCase):
         with self.assertRaises(TypeError) as cm:
             rect = Rectangle()
         except_msg = "__init__() missing 2 required positional arguments: "\
-                    "'width' and 'height'"
-        self.assertEqual(str(cm.exception),except_msg)
+            "'width' and 'height'"
+        self.assertEqual(str(cm.exception), except_msg)
 
         with self.assertRaises(TypeError) as cm:
             rect = Rectangle(10)
-        except_msg = "__init__() missing 1 required positional argument: 'height'"
+        except_msg = "__init__() missing 1 required "\
+            "positional argument: 'height'"
         self.assertEqual(str(cm.exception), except_msg)
 
     def test_normal_creation(self):
@@ -128,7 +129,8 @@ class TestRectangle(unittest.TestCase):
 
                 rect = Rectangle(2, 2)
                 rect.display()
-            out = "\n\n  #\n" + ("  " + "#" * 5 + "\n") * 10 + ("#" * 2 + "\n") * 2
+            out = "\n\n  #\n" +\
+                ("  " + "#" * 5 + "\n") * 10 + ("#" * 2 + "\n") * 2
             self.assertEqual(buf.getvalue(), out)
 
     def test_magic_str_method(self):
@@ -137,16 +139,16 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(rect.__str__(), "[Rectangle] (12) 2/1 - 4/6")
 
         rect = Rectangle(5, 5, 1)
-        self.assertEqual(rect.__str__(),
-                "[Rectangle] ({}) 1/0 - 5/5".format(rect.id))
+        msg = "[Rectangle] ({}) 1/0 - 5/5"
+        self.assertEqual(rect.__str__(), msg.format(rect.id))
 
     def test_update_with_args(self):
         """Test update method with *args"""
         rect = Rectangle(10, 10, 10, 10)
 
-        self.assertEqual(rect.__str__(),
-                "[Rectangle] ({}) 10/10 - 10/10".format(rect.id))
-       
+        msg = "[Rectangle] ({}) 10/10 - 10/10"
+        self.assertEqual(rect.__str__(), msg.format(rect.id))
+
         rect.update(89)
         self.assertEqual(rect.__str__(), "[Rectangle] (89) 10/10 - 10/10")
 
@@ -164,15 +166,15 @@ class TestRectangle(unittest.TestCase):
 
         with self.assertRaises(TypeError) as cm:
             rect.update(89, 2, 3, 4, 5, 6)
-        except_msg = "update() takes at max 5 positional arguments but 6 were given"
+        except_msg = "update() takes at max 5 positional "\
+            "arguments but 6 were given"
         self.assertEqual(str(cm.exception), except_msg)
 
     def test_update_with_kwargs(self):
         """Test update moethod with **kwargs"""
         rect = Rectangle(10, 10, 10, 10, 1)
 
-        self.assertEqual(rect.__str__(),
-                "[Rectangle] (1) 10/10 - 10/10")
+        self.assertEqual(rect.__str__(), "[Rectangle] (1) 10/10 - 10/10")
 
         rect.update(height=1)
         self.assertEqual(rect.__str__(), "[Rectangle] (1) 10/10 - 10/1")
@@ -241,7 +243,7 @@ class TestRectangle(unittest.TestCase):
 
         saved = ""
         with open('Rectangle.json', 'r', encoding="utf-8") as f:
-                saved = f.read()
+            saved = f.read()
         self.assertEqual(saved, "[]")
 
         rect_1 = Rectangle(10, 7, 2, 8)
