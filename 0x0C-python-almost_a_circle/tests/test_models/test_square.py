@@ -211,6 +211,7 @@ class TestSquare(unittest.TestCase):
     def test_save_to_file_classmethod(self):
         """Test ``save_to_file`` classmethod on Square"""
         Square.save_to_file(None)
+        Square.save_to_file([])
 
         saved = ""
         with open('Square.json', 'r', encoding="utf-8") as f:
