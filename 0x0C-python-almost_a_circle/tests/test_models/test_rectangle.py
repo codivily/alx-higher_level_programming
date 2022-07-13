@@ -241,7 +241,6 @@ class TestRectangle(unittest.TestCase):
     def test_save_to_file_classmethod(self):
         """Test ``save_to_file`` classmethod on Rectangle"""
         Rectangle.save_to_file(None)
-        Rectangle.save_to_file([])
 
         saved = ""
         with open('Rectangle.json', 'r', encoding="utf-8") as f:
