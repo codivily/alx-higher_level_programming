@@ -1,2 +1,2 @@
--- List all database's scheams
+/* List all database's scheams */
 SHOW SCHEMAS; 
