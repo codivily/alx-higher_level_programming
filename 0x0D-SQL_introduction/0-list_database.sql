@@ -1,3 +1,2 @@
 -- List all database's scheams
-show SCHEMAS;
-
+SHOW SCHEMAS; 
