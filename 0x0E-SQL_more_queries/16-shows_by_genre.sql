@@ -1,5 +1,5 @@
 -- A script that lists all genres from hbtn_0d_tvshows, and displays the numb
-SELECT tv.title, IF(ISNULL(genre.name) = 1, 'NULL', genre.name) as name
+SELECT tv.title, IF(ISNULL(genre.name) = 1, 'NULL', genre.name) AS name
 FROM tv_shows tv
 	LEFT JOIN tv_show_genres tvg
 		ON tvg.show_id = tv.id
