@@ -1,2 +1,3 @@
-const myVar = "javaScript";
+#!/usr/bin/node
+const myVar = 'javaScript';
 console.log(myVar);
