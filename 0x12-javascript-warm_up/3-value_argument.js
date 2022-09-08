@@ -2,4 +2,8 @@
 const process = require('node:process');
 const args = process.argv.slice(2);
 
-console.log(args[0] ? args.join(' ') : 'No argument');
+if (args[0]) {
+  console.log(...args);
+} else {
+  console.log('No argument');
+}
