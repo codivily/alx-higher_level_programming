@@ -17,8 +17,9 @@ if __name__ == '__main__':
 
     """ create a cursor to query the database """
     cur = conn.cursor()
-    cur.execute(
-            'SELECT id, name FROM states WHERE name LIKE "N%" ORDER BY id ASC')
+    sql = 'SELECT id, name FROM states WHERE name '
+    sql += 'LIKE BINARY "N%" ORDER BY id ASC'
+    cur.execute(sql)
     query_rows = cur.fetchall()
 
     for row in query_rows:
