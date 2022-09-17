@@ -17,10 +17,8 @@ if __name__ == '__main__':
 
     """ create a cursor to query the database """
     cur = conn.cursor()
-    sql = 'SELECT id, name FROM states WHERE'
-    sql += ' name="' + argv[4] + '" '
-    sql += ' ORDER BY id ASC'
-    cur.execute(sql)
+    sql = 'SELECT id, name FROM states WHERE BINARY name="{}" ORDER BY id ASC'
+    cur.execute(sql.format(argv[4]))
     query_rows = cur.fetchall()
 
     for row in query_rows:
