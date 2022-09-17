@@ -19,7 +19,7 @@ if __name__ == '__main__':
     cur = conn.cursor()
     sql = 'SELECT id, name FROM states WHERE'
     sql += ' name="' + argv[4] + '" '
-    sql + ' ORDER BY id ASC'
+    sql += ' ORDER BY id ASC'
     cur.execute(sql)
     query_rows = cur.fetchall()
 
