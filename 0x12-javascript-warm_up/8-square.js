@@ -9,7 +9,10 @@ if (isNaN(size)) {
     for (let x = 0; x < size; x++) {
       output += 'X';
     }
-    output += '\n';
+
+    if (y < size - 1) {
+      output += '\n';
+    }
   }
   console.log(output);
 }
