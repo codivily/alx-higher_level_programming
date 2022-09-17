@@ -1,5 +1,4 @@
 #!/usr/bin/node
-const process = require('node:process');
 const args = process.argv.slice(2);
 switch (args.length) {
   case 0: console.log('No argument'); break;
