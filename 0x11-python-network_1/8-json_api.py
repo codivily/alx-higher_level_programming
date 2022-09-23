@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-"""Sends a request to the URL and displays the body of the response (decoded
-in utf-8)"""
+"""A script that takes in a letter and sends a POST request
+http://0.0.0.0:5000/search_user with the letter as a parameter"""
+
 
 if __name__ == '__main__':
     import sys
@@ -16,7 +17,7 @@ if __name__ == '__main__':
     try:
         data = r.json()
         if not data:
-            print 'No result'
+            print('No result')
         else:
             print('[{}] {}'.format(data.get('id'), data.get('name')))
     except requests.exceptions.JSONDecodeError:
