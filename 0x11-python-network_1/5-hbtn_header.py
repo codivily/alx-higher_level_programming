@@ -5,5 +5,6 @@ in the X-Request-Id variable found in the header"""
 if __name__ == '__main__':
     import sys
     import requests
-    r = requests.get(sys.argv[1])
+    url = sys.argv[1]
+    r = requests.get(url)
     print(r.headers['X-Request-Id'])
