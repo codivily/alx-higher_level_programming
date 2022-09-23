@@ -4,7 +4,7 @@ and displays the body of the resposne (decoded in utf-8)"""
 
 if __name__ == '__main__':
     import sys
-    import request
+    import requests
 
     url = sys.argv[1]
     email = sys.argv[2]
