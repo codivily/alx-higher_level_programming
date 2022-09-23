@@ -5,13 +5,14 @@ uses the GitHub API to display your id"""
 if __name__ == '__main__':
     import sys
     import requests
-    from requests.auth import HTTPBasicAuth
 
     username = sys.argv[1]
     password = sys.argv[2]
 
     url = 'https://api.github.com/user'
-    r = requests.post(url, auth=HTTPBasicAuth(username, password))
+    headers = {'Authentization': 'Basic ' + '{}:{}'.format(username, password)}
+    headers['Accept'] = 'application/json'
+    r = requests.post(url, headers=headers)
 
     if r.status_code == 200:
         data = r.json()
