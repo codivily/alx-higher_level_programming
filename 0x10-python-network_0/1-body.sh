@@ -1,3 +1,3 @@
 #!/bin/bash
 # Display the response body only if status code is 200
-curl -s -X GET "$1"
+curl -s "$1"
