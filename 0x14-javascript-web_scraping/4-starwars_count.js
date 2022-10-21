@@ -3,13 +3,16 @@
 const request = require('request');
 
 request('https://swapi-api.hbtn.io/api/films/', (_, response, body) => {
-  const data = JSON.parse(body);
-  let count = 0;
+  const data = JSON.parse(body).results;
 
-  data.results.forEach(item => {
-    if (item.characters.includes('https://swapi-api.hbtn.io/api/people/18/')) {
-      count += 1;
+  const count = data.reduce((count, item) => {
+    for (const url of item.characters) {
+      if (url.indexOf('18') !== -1) {
+        return count + 1;
+      }
     }
-  });
+    return count;
+  }, 0);
+
   console.log(count);
 });
