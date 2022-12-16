@@ -9,7 +9,7 @@ if __name__ == '__main__':
 
     term = ""
     if len(sys.argv) > 1:
-        term = sys.argv[1]
+        term = sys.argv[1][0]
 
     url = 'http://0.0.0.0:5000/search_user'
     r = requests.post(url, data={'q': term})

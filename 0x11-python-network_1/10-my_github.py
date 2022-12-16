@@ -10,9 +10,7 @@ if __name__ == '__main__':
     password = sys.argv[2]
 
     url = 'https://api.github.com/user'
-    headers = {'Authentization': 'Basic ' + '{}:{}'.format(username, password)}
-    headers['Accept'] = 'application/json'
-    r = requests.post(url, headers=headers)
+    r = requests.post(url, auth=(username, password))
 
     if r.status_code == 200:
         data = r.json()
